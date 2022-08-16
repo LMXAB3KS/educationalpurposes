@@ -69,13 +69,4 @@ int main()
     
 }
 
-//other stuff you should know if u arent good with c++
-//fstream is basically one of file handling methods in c++
-//this  class is obtained from fstreambase and from the corresponding iostream class. 
-//this class are designed in a way that they are able to manage the disk files, announced in fstream, and so this file must be included in any program that uses files.
-//confused? read this: https://www.geeksforgeeks.org/std-fstream-close-in-cpp/
-//also geeksforgeeks is a good place to learn.
 
-//also i prolly forgot to explain other shit.
-//if u think i need to explain something important pls tell me in the issues tab thanks
-//s
