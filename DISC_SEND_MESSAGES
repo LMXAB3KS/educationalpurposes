@@ -1,0 +1,60 @@
+import requests
+import time 
+#I LOVE SPAMMING
+ 
+token = "" #YOUR_DISCORD_TOKEN_GOES_HERE
+channel_id = input("Enter the channel ID: ")  #YOUR_CHANNEL_ID_GOES_HERE 
+message = str(input("Enter your message: ")) #YOUR_CUSTOM_MESSAGE_GOES_HERE
+
+RANGE = int(input("Enter the number of times the task is to be repeated: "))
+for x in range(RANGE):
+    
+    url = 'https://discord.com/api/v8/channels/{}/messages'.format(channel_id)
+    data = {"content": message}
+    header = {"authorization": token} 
+    r = requests.post(url, data=data, headers=header)
+    if r.status_code == 200:
+        print("200 (OK)")
+    
+    elif r.status_code == 201:
+        print("201 (CREATED)")
+
+    elif r.status_code == 204:
+        print("204 (NO CONTENT)")
+        break
+    elif r.status_code == 304:
+        print("304 (NOT MODIFIED)")
+        break
+    
+    elif r.status_code == 400:
+        print("400 (BAD REQUEST)")
+        break
+    
+    elif r.status_code == 401:
+        print("401 (UNAUTHORIZED)")
+        break
+    
+    elif r.status_code == 403:
+        print("403 (FORBIDDEN)")
+        break
+    
+    elif r.status_code == 404:
+        print("404 (NOT FOUND)")
+        break
+    
+    elif r.status_code == 405:
+        print("405 (METHOD NOT ALLOWED)")
+    
+    elif r.status_code == 429:
+        print("429 (TOO MANY REQUESTS)")
+        break
+    
+    elif r.status_code == 502:
+        print("502 (GATEWAY UNAVAILABLE)")
+        break
+    
+    else:
+        print("5xx (SERVER ERROR)")
+        break
+
+
