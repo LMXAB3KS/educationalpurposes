@@ -1,0 +1,14 @@
+#include <iostream>
+#include <Windows.h>
+using namespace std;
+
+int main(void)
+
+{
+int x;
+int y;
+//FreeConsole();
+while (true){
+SetCursorPos(x,y);
+}
+}
